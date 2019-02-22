@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Hanson on 2018/8/23.
+  
+*/
+
+"Select" = "选择";
+"Cancel" = "取消";
+"Confirm" = "确认";
+"ConfirmDelete" = "确认删除?";
+"Downloading" = "下载中...";
+"Deleting" = "删除中...";
+"DeleteFail" = "删除失败";
+"DeleteSuccess" = "删除成功";
+"DownloadSuccess" = "下载成功";
+"DownloadFail" = "下载失败";
+"Detail" = "详细";
+"Date" = "日期";
+"Size" = "大小";
+"Dimention" = "尺寸";
+"Duration" = "时长";
+"Format" = "格式";
+"LoadingList" = "正在加载图片列表...";
+"LoadingTimeout" = "加载超时，请稍后再试。";
+"LoadingFail" = "加载失败，请检查飞机的连接状态。";

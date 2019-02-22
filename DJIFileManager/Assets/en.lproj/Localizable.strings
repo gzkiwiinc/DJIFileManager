@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Hanson on 2018/8/23.
+  
+*/
+
+"Select" = "Select";
+"Cancel" = "Cancel";
+"Confirm" = "Confirm";
+"ConfirmDelete" = "Confirm to Delete";
+"Downloading" = "Downloading...";
+"Deleting" = "Deleting...";
+"DeleteFail" = "Delete Failed";
+"DeleteSuccess" = "Delete Success";
+"DownloadSuccess" = "Download Success";
+"DownloadFail" = "Download Failed";
+"Detail" = "Detail";
+"Date" = "Date";
+"Size" = "Size";
+"Dimention" = "Dimention";
+"Duration" = "Duration";
+"Format" = "Format";
+"LoadingList" = "Loading picture list...";
+"LoadingTimeout" = "Timeout, please try again later.";
+"LoadingFail" = "Load failed, please check the connection status of the aircraft";

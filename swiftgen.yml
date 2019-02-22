@@ -1,0 +1,12 @@
+input_dir: DJIFileManager/Assets
+output_dir: DJIFileManager/
+
+xcassets:
+  paths: Assets.xcassets
+  templatePath: xcassets.stencil
+  output: Assets.swift
+
+strings:
+  paths: zh-Hans.lproj/Localizable.strings
+  templatePath: structured-swift4.stencil
+  output: Localizable.swift
