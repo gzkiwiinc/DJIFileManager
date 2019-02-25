@@ -13,12 +13,16 @@ class MediaFileOverlayView: UIView {
     lazy var bottomToolBar = BottomToolBar()
     lazy var topToolBar = TopToolBar()
     
+    private let bottomSafeAreaView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         bottomToolBar.clipsToBounds = true
+        bottomSafeAreaView.backgroundColor = djiFileManagerTheme.backgroundColor
         addSubview(topToolBar)
         addSubview(bottomToolBar)
+        addSubview(bottomSafeAreaView)
     
         topToolBar.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -36,6 +40,14 @@ class MediaFileOverlayView: UIView {
                 make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
             } else {
                 make.bottom.equalToSuperview()
+            }
+        }
+        bottomSafeAreaView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+            } else {
+                make.top.equalTo(self.snp.bottom)
             }
         }
     }
