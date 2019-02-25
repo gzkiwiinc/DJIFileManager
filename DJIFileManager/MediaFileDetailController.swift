@@ -13,19 +13,18 @@ import AVKit
 class MediaFileDetailViewController: UIViewController {
     
     var mediaFile: MediaFileBrowsable
+    var scalableImageView = ScalableImageView()
 
-    lazy private(set) var scalableImageView: ScalableImageView = {
-        let scalableImageView = ScalableImageView()
-        scalableImageView.frame = view.bounds
-        scalableImageView.image = mediaFile.thumbnailImage
-        return scalableImageView
-    }()
     lazy private var avPlayer = AVPlayer()
     lazy private(set) var playButton = UIButton()
 
+    private let indicator = UIActivityIndicatorView(style: .whiteLarge)
     
     public init(mediaFile: MediaFileBrowsable) {
         self.mediaFile = mediaFile
+        if let mediaFile = mediaFile as? MediaFileModel {
+            scalableImageView.image = mediaFile.djiMediaFile.preview ?? mediaFile.thumbnailImage
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,9 +34,18 @@ class MediaFileDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
+        fetchPreviewImage()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scalableImageView.frame = view.bounds
+    }
+    
+    private func setupView() {
         view.addSubview(scalableImageView)
         view.addSubview(playButton)
+        view.addSubview(indicator)
         
         playButton.setImage(Asset.btnFilePlay.image, for: .normal)
         playButton.addTarget(self, action: #selector(playButtonDidClicked), for: .touchUpInside)
@@ -48,6 +56,7 @@ class MediaFileDetailViewController: UIViewController {
         scalableImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        indicator.center = view.center
         
         guard let mediaFile = mediaFile as? MediaFileModel else { return }
         let mediaType = mediaFile.djiMediaFile.mediaType
@@ -58,8 +67,19 @@ class MediaFileDetailViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        scalableImageView.frame = view.bounds
+    // 获取清晰度更高的预览图
+    private func fetchPreviewImage() {
+        guard let mediaFile = mediaFile as? MediaFileModel
+            , mediaFile.djiMediaFile.preview == nil else { return }
+        indicator.startAnimating()
+        firstly {
+            mediaFile.djiMediaFile.fetchPreview()
+        }.done {
+            self.scalableImageView.image = mediaFile.djiMediaFile.preview
+            self.indicator.stopAnimating()
+        }.catch { (error) in
+            self.indicator.stopAnimating()
+        }
     }
     
     @objc private func playButtonDidClicked() {
