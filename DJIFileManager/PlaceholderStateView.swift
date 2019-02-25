@@ -58,7 +58,7 @@ extension PlaceholderStateView {
             case .timeout:
                 return L10n.loadingTimeout
             case .noData:
-                return L10n.noData
+                return L10n.noMediaFiles
             case .fail:
                 return L10n.loadingFail
             }

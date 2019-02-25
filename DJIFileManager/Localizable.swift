@@ -45,8 +45,8 @@ internal enum L10n {
   internal static let loadingList = L10n.tr("Localizable", "LoadingList")
   /// 加载超时，请稍后再试。
   internal static let loadingTimeout = L10n.tr("Localizable", "LoadingTimeout")
-  /// 没有文件
-  internal static let noData = L10n.tr("Localizable", "NoData")
+  /// 没有媒体文件
+  internal static let noMediaFiles = L10n.tr("Localizable", "NoMediaFiles")
   /// 选择
   internal static let select = L10n.tr("Localizable", "Select")
   /// 大小

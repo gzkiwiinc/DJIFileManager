@@ -25,4 +25,4 @@
 "LoadingList" = "正在加载图片列表...";
 "LoadingTimeout" = "加载超时，请稍后再试。";
 "LoadingFail" = "加载失败，请检查飞机的连接状态。";
-"NoData" = "没有文件";
+"NoMediaFiles" = "没有媒体文件";
