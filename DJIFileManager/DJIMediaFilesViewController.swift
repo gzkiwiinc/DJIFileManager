@@ -123,7 +123,7 @@ extension DJIMediaFilesViewController {
             mediaManager.fetchMediaFileListSnapshot(storageLocation: storgeLoaction)
         }.then { fileList -> Promise<Void> in
             self.collectionView.mj_footer.isHidden = true
-            self.djiMediaFileList = fileList
+            self.djiMediaFileList = fileList.reversed()
             return self.fetchMediaContent(index: self.mediaFileIndex, contentType: .thumbnail)
         }.done {
             self.navigationItem.rightBarButtonItem = self.selectButton
