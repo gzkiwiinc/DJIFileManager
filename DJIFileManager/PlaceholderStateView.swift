@@ -49,7 +49,7 @@ class PlaceholderStateView: UIView {
 
 extension PlaceholderStateView {
     enum State {
-        case loading, timeout, fail
+        case loading, timeout, noData, fail
         
         var description: String {
             switch self {
@@ -57,6 +57,8 @@ extension PlaceholderStateView {
                 return L10n.loadingList
             case .timeout:
                 return L10n.loadingTimeout
+            case .noData:
+                return L10n.noData
             case .fail:
                 return L10n.loadingFail
             }
@@ -68,6 +70,8 @@ extension PlaceholderStateView {
                 return Asset.imageDroneLoading.image
             case .timeout:
                 return Asset.imageDroneTimeout.image
+            case .noData:
+                return Asset.imageDroneError.image
             case .fail:
                 return Asset.imageDroneError.image
             }
