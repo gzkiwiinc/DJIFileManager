@@ -18,6 +18,7 @@ class MediaFileCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         imageView = UIImageView()
+        imageView.clipsToBounds = true
         infoLabel = UILabel()
         infoLabel.textColor = UIColor.white
         infoLabel.font = UIFont.systemFont(ofSize: 12)
@@ -48,6 +49,7 @@ class MediaFileCollectionViewCell: UICollectionViewCell {
     
     func configureCell(model: MediaFileModel) {
         imageView.image = model.thumbnailImage
+        imageView.contentMode = .scaleAspectFill
         overlayView.isHidden = !model.isSelected
         let mediaType = model.djiMediaFile.mediaType
         if mediaType == .MOV || mediaType == .MP4 {
