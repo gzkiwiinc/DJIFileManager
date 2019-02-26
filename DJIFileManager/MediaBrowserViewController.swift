@@ -161,12 +161,12 @@ extension MediaBrowserViewController {
             , let mediaManager = camera.mediaManager else {
             let resultAlert = UIAlertController(title: L10n.deleteFail, message: "", preferredStyle: .alert)
             resultAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default))
-            self.present(resultAlert, animated: true, completion: nil)
+            present(resultAlert, animated: true, completion: nil)
             return
         }
         
         let statusAlert = UIAlertController(title: L10n.deleting, message: "", preferredStyle: .alert)
-        self.present(statusAlert, animated: true, completion: nil)
+        present(statusAlert, animated: true, completion: nil)
         
         firstly {
             mediaManager.deleteMediaFiles([mediaFile.djiMediaFile])
@@ -178,10 +178,11 @@ extension MediaBrowserViewController {
                 self.delegate?.mediaBrowser(self, didDeletedMedia: mediaFile, at: index)
             }
         }.catch { error in
-            statusAlert.dismiss(animated: true, completion: nil)
-            let resultAlert = UIAlertController(title: L10n.deleteFail, message: error.localizedDescription, preferredStyle: .alert)
-            resultAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default))
-            self.present(resultAlert, animated: true, completion: nil)
+            statusAlert.dismiss(animated: true) {
+                let resultAlert = UIAlertController(title: L10n.deleteFail, message: error.localizedDescription, preferredStyle: .alert)
+                resultAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default))
+                self.present(resultAlert, animated: true, completion: nil)
+            }
         }
     }
 }
@@ -243,6 +244,43 @@ extension MediaBrowserViewController: UIPageViewControllerDataSource, UIPageView
             return nil
         }
     }
+    
+    private func downloadAndShareVideo(mediaFile: DJIMediaFile) {
+        let statusAlert = UIAlertController(title: L10n.downloading, message: "", preferredStyle: .alert)
+        statusAlert.addAction(UIAlertAction(title: L10n.cancel, style: .cancel) { _ in
+            mediaFile.stopFetchingFileData(completion: nil)
+        })
+        present(statusAlert, animated: true, completion: nil)
+        
+        MediaFileManager.downloadVideo(mediaFile: mediaFile) { (progress) in
+            statusAlert.message = mediaFile.fileName + ": " + String(format: "%.2f", progress) + "%"
+        }.then { videoUrl in
+            PhotoLibraryManager.saveVideo(url: videoUrl).map { _ -> URL in
+                return videoUrl
+            }
+        }.done { videoUrl in
+            statusAlert.dismiss(animated: true) {
+                self.showShareActivity(items: [videoUrl])
+            }
+        }.catch { error in
+            statusAlert.dismiss(animated: true) {
+                let resultAlert = UIAlertController(title: L10n.downloadFail, message: error.localizedDescription, preferredStyle: .alert)
+                resultAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default))
+                self.present(resultAlert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func showShareActivity(items: [Any]) {
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            present(activityViewController, animated: true, completion: nil)
+        } else {
+            let popoverController = activityViewController.popoverPresentationController
+            popoverController?.sourceView = view
+            present(activityViewController, animated: true, completion: nil)
+        }
+    }
 }
 
 
@@ -299,17 +337,21 @@ extension MediaBrowserViewController: BottomToolBarDelegate {
     }
     
     func shareButtonDidClicked() {
-        // TODO: - If the file is Video
-        guard let mediaFile = currentMedia as? MediaFileModel,
-            let image = mediaFile.thumbnailImage else { return }
-        
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            present(activityViewController, animated: true, completion: nil)
+        guard let mediaFile = (currentMedia as? MediaFileModel)?.djiMediaFile else { return }
+        if mediaFile.mediaType == .MP4 || mediaFile.mediaType == .MOV {
+            if let videoUrl = MediaFileManager.getMediaFileCacheURL(mediaFile: mediaFile) {
+                showShareActivity(items: [videoUrl])
+            } else {
+                let noticeAlert = UIAlertController(title: L10n.notice, message: L10n.downloadAndShare, preferredStyle: .alert)
+                noticeAlert.addAction(UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil))
+                noticeAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default) { _ in
+                    self.downloadAndShareVideo(mediaFile: mediaFile)
+                })
+                present(noticeAlert, animated: true, completion: nil)
+            }
         } else {
-            let popoverController = activityViewController.popoverPresentationController
-            popoverController?.sourceView = view
-            present(activityViewController, animated: true, completion: nil)
+            guard let image = currentMediaFileViewController?.scalableImageView.image else { return }
+            showShareActivity(items: [image])
         }
     }
     
