@@ -6,6 +6,7 @@
   
 */
 
+"Notice" = "提示";
 "Select" = "选择";
 "Cancel" = "取消";
 "Confirm" = "确认";
@@ -26,3 +27,4 @@
 "LoadingTimeout" = "加载超时，请稍后再试。";
 "LoadingFail" = "加载失败，请检查飞机的连接状态。";
 "NoMediaFiles" = "没有媒体文件";
+"DownloadAndPlay" = "开始下载并播放";

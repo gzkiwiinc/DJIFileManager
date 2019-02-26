@@ -6,6 +6,7 @@
   
 */
 
+"Notice" = "Notice";
 "Select" = "Select";
 "Cancel" = "Cancel";
 "Confirm" = "Confirm";
@@ -26,3 +27,4 @@
 "LoadingTimeout" = "Timeout, please try again later.";
 "LoadingFail" = "Load failed, please check the connection status of the aircraft";
 "NoMediaFiles" = "No media files";
+"DownloadAndPlay" = "Start to download and play it.";

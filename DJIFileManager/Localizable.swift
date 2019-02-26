@@ -29,6 +29,8 @@ internal enum L10n {
   internal static let detail = L10n.tr("Localizable", "Detail")
   /// 尺寸
   internal static let dimention = L10n.tr("Localizable", "Dimention")
+  /// 开始下载并播放
+  internal static let downloadAndPlay = L10n.tr("Localizable", "DownloadAndPlay")
   /// 下载失败
   internal static let downloadFail = L10n.tr("Localizable", "DownloadFail")
   /// 下载中...
@@ -47,6 +49,8 @@ internal enum L10n {
   internal static let loadingTimeout = L10n.tr("Localizable", "LoadingTimeout")
   /// 没有媒体文件
   internal static let noMediaFiles = L10n.tr("Localizable", "NoMediaFiles")
+  /// 提示
+  internal static let notice = L10n.tr("Localizable", "Notice")
   /// 选择
   internal static let select = L10n.tr("Localizable", "Select")
   /// 大小
