@@ -122,14 +122,12 @@ extension DJIMediaFilesViewController {
         }.then { storgeLoaction in
             mediaManager.fetchMediaFileListSnapshot(storageLocation: storgeLoaction)
         }.then { fileList -> Promise<Void> in
-            self.collectionView.mj_footer.isHidden = true
-            self.djiMediaFileList = fileList.reversed()
-            return self.fetchMediaContent(index: self.mediaFileIndex, contentType: .thumbnail)
+            return self.fetchMediaThumbnail(mediaFileList: fileList)
         }.done {
             self.navigationItem.rightBarButtonItem = self.selectButton
-            self.collectionView.reloadData()
             self.collectionView.mj_footer.isHidden = false
             self.collectionView.mj_footer.endRefreshing()
+            self.collectionView.reloadData()
         }.catch { error in
             self.placeholderStateView.setup(state: .timeout)
             print(error.localizedDescription)
@@ -155,6 +153,21 @@ extension DJIMediaFilesViewController {
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: indexPaths)
         }, completion: nil)
+        
+        if mediaFileModelList.count == 0 {
+            placeholderStateView.setup(state: .noData)
+        }
+    }
+    
+    private func fetchMediaThumbnail(mediaFileList: [DJIMediaFile]) -> Promise<Void> {
+        collectionView.mj_footer.isHidden = true
+        if mediaFileList.count == 0 {
+            placeholderStateView.setup(state: .noData)
+            return Promise.value(())
+        } else {
+            djiMediaFileList = mediaFileList.reversed()
+            return self.fetchMediaContent(index: self.mediaFileIndex, contentType: .thumbnail)
+        }
     }
     
     private func fetchMediaContent(index: Int, contentType: DJIFetchMediaTaskContent) -> Promise<Void> {

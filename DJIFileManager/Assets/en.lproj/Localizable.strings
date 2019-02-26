@@ -25,3 +25,4 @@
 "LoadingList" = "Loading picture list...";
 "LoadingTimeout" = "Timeout, please try again later.";
 "LoadingFail" = "Load failed, please check the connection status of the aircraft";
+"NoMediaFiles" = "No media files";

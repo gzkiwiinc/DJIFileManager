@@ -67,7 +67,7 @@ class MediaFileDetailViewController: UIViewController {
         }
     }
     
-    // 获取清晰度更高的预览图
+    // get the preview image which has higher resolution
     private func fetchPreviewImage() {
         guard let mediaFile = mediaFile as? MediaFileModel
             , mediaFile.djiMediaFile.preview == nil else { return }
@@ -76,9 +76,10 @@ class MediaFileDetailViewController: UIViewController {
             mediaFile.djiMediaFile.fetchPreview()
         }.done {
             self.scalableImageView.image = mediaFile.djiMediaFile.preview
+        }.ensure {
             self.indicator.stopAnimating()
         }.catch { (error) in
-            self.indicator.stopAnimating()
+            print("fetch preview image failed: \(error.localizedDescription)")
         }
     }
     
