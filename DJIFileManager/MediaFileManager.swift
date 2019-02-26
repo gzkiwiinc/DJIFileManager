@@ -13,7 +13,7 @@ import Photos
 import DJISDKExtension
 
 enum MediaFileManagerError: LocalizedError {
-    case cameraNotReady, fileTypeNotMatch, downloadCancel, createFileFail
+    case cameraNotReady, fileTypeNotMatch, downloadCancel, createFileFail, unAuthorized
     
     var errorDescription: String {
         switch self {
@@ -25,6 +25,8 @@ enum MediaFileManagerError: LocalizedError {
             return "download is canceled"
         case .createFileFail:
             return "fail to create file"
+        case .unAuthorized:
+            return "do not have right to access Photo Library"
         }
     }
 }
@@ -42,8 +44,9 @@ class MediaFileManager {
         guard let camera = DJISDKManager.product()?.camera else {
             return Promise(error: MediaFileManagerError.cameraNotReady)
         }
-        
-        return camera.setMode(.mediaDownload).then {
+        return checkPhotoLibraryAuthorization().then {
+            camera.setMode(.mediaDownload)
+        }.then {
             mediaFile.fetchFileData(dispatchQueue: .main) { progress in
                 downloadProgress?(progress)
             }
@@ -63,7 +66,9 @@ class MediaFileManager {
             return Promise(error: MediaFileManagerError.cameraNotReady)
         }
         
-        return camera.setMode(.mediaDownload).then {
+        return checkPhotoLibraryAuthorization().then {
+            camera.setMode(.mediaDownload)
+        }.then {
             mediaFile.fetchFileData(dispatchQueue: .main) { progress in
                 downloadProgress?(progress)
             }
@@ -95,6 +100,17 @@ class MediaFileManager {
             return URL(fileURLWithPath: filePath)
         } else {
             return nil
+        }
+    }
+    
+    private static func checkPhotoLibraryAuthorization() -> Promise<Void> {
+        let status = PHPhotoLibrary.authorizationStatus()
+        if status == .authorized {
+            return Promise.value(())
+        } else if status == .notDetermined {
+            return PHPhotoLibrary.shared().requestPhotoLibrayAuthorization()
+        } else {
+            return Promise(error: MediaFileManagerError.unAuthorized)
         }
     }
 }
