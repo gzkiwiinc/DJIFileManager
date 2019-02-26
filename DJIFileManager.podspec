@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DJIFileManager'
-    s.version          = '0.1.2'
+    s.version          = '0.1.3'
     s.summary          = 'A file management component for DJISDK-iOS'
     s.homepage         = 'https://github.com/gzkiwiinc/DJIFileManager'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
