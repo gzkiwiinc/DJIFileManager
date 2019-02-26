@@ -84,6 +84,20 @@ class MediaFileDetailViewController: UIViewController {
     }
     
     @objc private func playButtonDidClicked() {
+        if let mediaFile = (mediaFile as? MediaFileModel)?.djiMediaFile
+         , let cacheUrl = MediaFileManager.getMediaFileCacheURL(mediaFile: mediaFile) {
+            playVideo(url: cacheUrl)
+        } else {
+            let noticeAlert = UIAlertController(title: L10n.notice, message: L10n.downloadAndPlay, preferredStyle: .alert)
+            noticeAlert.addAction(UIAlertAction(title: L10n.cancel, style: .cancel, handler: nil))
+            noticeAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default) { _ in
+                self.downloadAndPlayVideo()
+            })
+            present(noticeAlert, animated: true, completion: nil)
+        }
+    }
+    
+    private func downloadAndPlayVideo() {
         guard let mediaFile = (mediaFile as? MediaFileModel)?.djiMediaFile
             , mediaFile.mediaType == .MP4 || mediaFile.mediaType == .MOV else {
             let alert = UIAlertController(title: MediaFileManagerError.fileTypeNotMatch.errorDescription, message: "", preferredStyle: .alert)
@@ -93,22 +107,20 @@ class MediaFileDetailViewController: UIViewController {
         }
         
         let statusAlert = UIAlertController(title: L10n.downloading, message: "", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: L10n.cancel, style: .cancel) { _ in
+        statusAlert.addAction(UIAlertAction(title: L10n.cancel, style: .cancel) { _ in
             mediaFile.stopFetchingFileData(completion: nil)
-        }
-        statusAlert.addAction(cancelAction)
-        UIApplication.presentedViewController()?.present(statusAlert, animated: true, completion: nil)
+        })
+        present(statusAlert, animated: true, completion: nil)
         
         MediaFileManager.downloadVideo(mediaFile: mediaFile) { (progress) in
             statusAlert.message = mediaFile.fileName + ": " + String(format: "%.2f", progress) + "%"
-        }.done { videoURL in
+        }.then { videoUrl in
+            PhotoLibraryManager.saveVideo(url: videoUrl).map { _ -> URL in
+                return videoUrl
+            }
+        }.done { videoUrl in
             statusAlert.dismiss(animated: true) {
-                self.avPlayer.replaceCurrentItem(with: AVPlayerItem(url: videoURL))
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = self.avPlayer
-                self.present(playerViewController, animated: true) {
-                    playerViewController.player?.play()
-                }
+                self.playVideo(url: videoUrl)
             }
         }.catch { error in
             statusAlert.dismiss(animated: true) {
@@ -116,6 +128,15 @@ class MediaFileDetailViewController: UIViewController {
                 resultAlert.addAction(UIAlertAction(title: L10n.confirm, style: .default))
                 self.present(resultAlert, animated: true, completion: nil)
             }
+        }
+    }
+    
+    private func playVideo(url: URL) {
+        avPlayer.replaceCurrentItem(with: AVPlayerItem(url: url))
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = self.avPlayer
+        present(playerViewController, animated: true) {
+            playerViewController.player?.play()
         }
     }
 }
