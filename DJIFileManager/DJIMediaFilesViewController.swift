@@ -312,7 +312,11 @@ extension DJIMediaFilesViewController: BottomToolBarDelegate {
         }.catch { error in
             statusAlert.dismiss(animated: true) {
                 resultAlert.title = L10n.downloadFail
-                resultAlert.message = error.localizedDescription
+                var errorMessage = error.localizedDescription
+                if let error = error as? MediaFileManagerError {
+                    errorMessage = error.errorDescription
+                }
+                resultAlert.message = errorMessage
                 self.present(resultAlert, animated: true, completion: nil)
             }
         }

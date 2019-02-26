@@ -75,4 +75,16 @@ extension PHPhotoLibrary {
         }
     }
     
+    func requestPhotoLibrayAuthorization() -> Promise<Void> {
+        return Promise { seal in
+            PHPhotoLibrary.requestAuthorization { (authorizationStatus) in
+                if authorizationStatus == .authorized {
+                    seal.fulfill(())
+                } else {
+                    seal.reject(MediaFileManagerError.unAuthorized)
+                }
+            }
+        }
+    }
+    
 }
