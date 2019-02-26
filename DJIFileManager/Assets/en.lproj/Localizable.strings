@@ -28,3 +28,4 @@
 "LoadingFail" = "Load failed, please check the connection status of the aircraft";
 "NoMediaFiles" = "No media files";
 "DownloadAndPlay" = "Start to download and play it.";
+"DownloadAndShare" = "Start to download and share it.";

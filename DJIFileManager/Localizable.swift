@@ -31,6 +31,8 @@ internal enum L10n {
   internal static let dimention = L10n.tr("Localizable", "Dimention")
   /// 开始下载并播放
   internal static let downloadAndPlay = L10n.tr("Localizable", "DownloadAndPlay")
+  /// 开始下载并分享
+  internal static let downloadAndShare = L10n.tr("Localizable", "DownloadAndShare")
   /// 下载失败
   internal static let downloadFail = L10n.tr("Localizable", "DownloadFail")
   /// 下载中...

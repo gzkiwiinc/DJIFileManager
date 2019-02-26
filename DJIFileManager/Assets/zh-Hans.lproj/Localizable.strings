@@ -28,3 +28,4 @@
 "LoadingFail" = "加载失败，请检查飞机的连接状态。";
 "NoMediaFiles" = "没有媒体文件";
 "DownloadAndPlay" = "开始下载并播放";
+"DownloadAndShare" = "开始下载并分享";
