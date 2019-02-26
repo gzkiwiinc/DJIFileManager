@@ -87,6 +87,16 @@ class MediaFileManager {
             }
         }
     }
+    
+    static func getMediaFileCacheURL(mediaFile: DJIMediaFile) -> URL? {
+        let rootPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0] as String
+        let filePath = rootPath + "/\(mediaFile.timeCreated)_\(mediaFile.fileName)"
+        if FileManager.default.fileExists(atPath: filePath) {
+            return URL(fileURLWithPath: filePath)
+        } else {
+            return nil
+        }
+    }
 }
 
 
