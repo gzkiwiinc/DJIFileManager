@@ -13,6 +13,12 @@ DJIFileManger is a simple media files manager for DJI product. It's base on [DJI
 - [x] 多选下载，保存图片或视频文件到系统相册。
 - [x] 默认提供黑色和白色主题。
 
+## ScreenShot
+
+加载缩略图 | 查看预览图及删除操作
+---|---
+![](https://github.com/gzkiwiinc/DJIFileManager/blob/develop/Screenshots/loadMedias.gif) | ![](https://github.com/gzkiwiinc/DJIFileManager/blob/develop/Screenshots/browser.gif)
+
 ## Requirements
 
 - iOS 9.0+
@@ -41,9 +47,6 @@ navigationController?.pushViewController(mediaFilesViewController, animated: tru
 
 ![](https://github.com/gzkiwiinc/DJIFileManager/blob/develop/Screenshots/DJIFileMangerExample.png)
 
-## ScreenShot
-
-![](https://github.com/gzkiwiinc/DJIFileManager/blob/develop/Screenshots/loadMedias.gif) ![](https://github.com/gzkiwiinc/DJIFileManager/blob/develop/Screenshots/browser.gif)
 
 ## License
 
