@@ -57,14 +57,9 @@ extension DJIMediaFilesViewController {
     
     private func setupCollectionView() {
         let collectionViewLayout = UICollectionViewFlowLayout()
-        let space: CGFloat = 2.0
-        let itemNum: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 7 : 4
-        let itemSpace = space * (itemNum - 1)
-        let itemWidth = (UIScreen.main.bounds.width - itemSpace) / itemNum
-        collectionViewLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
         collectionViewLayout.scrollDirection = .vertical
-        collectionViewLayout.minimumLineSpacing = space
-        collectionViewLayout.minimumInteritemSpacing = space
+        collectionViewLayout.minimumLineSpacing = 2.0
+        collectionViewLayout.minimumInteritemSpacing = 2.0
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = djiFileManagerTheme.backgroundColor
@@ -253,7 +248,7 @@ extension DJIMediaFilesViewController {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         placeholderStateView.isHidden = mediaFileModelList.count > 0
         collectionView.mj_footer.isHidden = mediaFileModelList.count < batchCount
@@ -276,6 +271,16 @@ extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionV
             mediaFileBrowser.delegate = self
             self.present(mediaFileBrowser, animated: true, completion: nil)
         }
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var itemNum: CGFloat = 4
+        if UIDevice.current.orientation.isLandscape || UIDevice.current.userInterfaceIdiom == .pad {
+            itemNum = 7
+        }
+        let itemSpace = 2.0 * (itemNum - 1)
+        let itemWidth = (UIScreen.main.bounds.width - itemSpace) / itemNum
+        return CGSize(width: itemWidth, height: itemWidth)
     }
 }
 
