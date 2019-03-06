@@ -57,6 +57,7 @@ extension DJIMediaFilesViewController {
     
     private func setupCollectionView() {
         let collectionViewLayout = UICollectionViewFlowLayout()
+        collectionViewLayout.itemSize = CGSize(width: 92, height: 92)
         collectionViewLayout.scrollDirection = .vertical
         collectionViewLayout.minimumLineSpacing = 2.0
         collectionViewLayout.minimumInteritemSpacing = 2.0
@@ -271,16 +272,6 @@ extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionV
             mediaFileBrowser.delegate = self
             self.present(mediaFileBrowser, animated: true, completion: nil)
         }
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var itemNum: CGFloat = 4
-        if UIDevice.current.orientation.isLandscape || UIDevice.current.userInterfaceIdiom == .pad {
-            itemNum = 7
-        }
-        let itemSpace = 2.0 * (itemNum - 1)
-        let itemWidth = (UIScreen.main.bounds.width - itemSpace) / itemNum
-        return CGSize(width: itemWidth, height: itemWidth)
     }
 }
 
