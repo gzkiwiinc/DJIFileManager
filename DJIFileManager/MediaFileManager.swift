@@ -15,7 +15,7 @@ import DJISDKExtension
 enum MediaFileManagerError: LocalizedError {
     case cameraNotReady, fileTypeNotMatch, downloadCancel, createFileFail, unAuthorized
     
-    var errorDescription: String {
+    var errorDescription: String? {
         switch self {
         case .cameraNotReady:
             return "camera is not ready"
