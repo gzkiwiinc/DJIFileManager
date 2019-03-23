@@ -50,6 +50,7 @@ extension DJIMediaFilesViewController {
     private func setupView() {
         selectButton.tintColor = djiFileManagerTheme.themeColor
         navigationController?.navigationBar.barTintColor = djiFileManagerTheme.backgroundColor
+        view.backgroundColor = djiFileManagerTheme.backgroundColor
         
         setupCollectionView()
         setupBottomToolBar()
@@ -83,7 +84,12 @@ extension DJIMediaFilesViewController {
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+                make.bottom.equalToSuperview()
+            } else {
+                make.edges.equalToSuperview()
+            }
         }
     }
     
