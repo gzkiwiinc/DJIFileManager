@@ -50,6 +50,7 @@ extension DJIMediaFilesViewController {
     private func setupView() {
         selectButton.tintColor = djiFileManagerTheme.themeColor
         navigationController?.navigationBar.barTintColor = djiFileManagerTheme.backgroundColor
+        view.backgroundColor = djiFileManagerTheme.backgroundColor
         
         setupCollectionView()
         setupBottomToolBar()
@@ -57,14 +58,10 @@ extension DJIMediaFilesViewController {
     
     private func setupCollectionView() {
         let collectionViewLayout = UICollectionViewFlowLayout()
-        let space: CGFloat = 2.0
-        let itemNum: CGFloat = UIDevice.current.userInterfaceIdiom == .pad ? 7 : 4
-        let itemSpace = space * (itemNum - 1)
-        let itemWidth = (UIScreen.main.bounds.width - itemSpace) / itemNum
-        collectionViewLayout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        collectionViewLayout.itemSize = CGSize(width: 92, height: 92)
         collectionViewLayout.scrollDirection = .vertical
-        collectionViewLayout.minimumLineSpacing = space
-        collectionViewLayout.minimumInteritemSpacing = space
+        collectionViewLayout.minimumLineSpacing = 2.0
+        collectionViewLayout.minimumInteritemSpacing = 2.0
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.backgroundColor = djiFileManagerTheme.backgroundColor
@@ -87,7 +84,12 @@ extension DJIMediaFilesViewController {
         
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            if #available(iOS 11.0, *) {
+                make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+                make.bottom.equalToSuperview()
+            } else {
+                make.edges.equalToSuperview()
+            }
         }
     }
     
@@ -253,7 +255,7 @@ extension DJIMediaFilesViewController {
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
-extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         placeholderStateView.isHidden = mediaFileModelList.count > 0
         collectionView.mj_footer.isHidden = mediaFileModelList.count < batchCount
@@ -312,11 +314,7 @@ extension DJIMediaFilesViewController: BottomToolBarDelegate {
         }.catch { error in
             statusAlert.dismiss(animated: true) {
                 resultAlert.title = L10n.downloadFail
-                var errorMessage = error.localizedDescription
-                if let error = error as? MediaFileManagerError {
-                    errorMessage = error.errorDescription
-                }
-                resultAlert.message = errorMessage
+                resultAlert.message = error.localizedDescription
                 self.present(resultAlert, animated: true, completion: nil)
             }
         }
