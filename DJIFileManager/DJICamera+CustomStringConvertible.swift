@@ -43,6 +43,8 @@ extension DJICameraVideoFrameRate: CustomStringConvertible {
             return "8.7fps"
         case .rateUnknown:
             return "unknown"
+        @unknown default:
+            return "unknown"
         }
     }
 }
@@ -97,6 +99,8 @@ extension DJICameraVideoResolution: CustomStringConvertible {
         case .resolution640x360:
             return "640x360"
         case .resolutionUnknown:
+            return "unknown"
+        @unknown default:
             return "unknown"
         }
     }

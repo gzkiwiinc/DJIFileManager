@@ -174,7 +174,7 @@ extension MediaBrowserViewController {
             statusAlert.dismiss(animated: true) {
                 self.dismiss(animated: true, completion: nil)
             }
-            if let index = self.dataSource.index(where: { $0 === mediaFile }) {
+            if let index = self.dataSource.firstIndex(where: { $0 === mediaFile }) {
                 self.delegate?.mediaBrowser(self, didDeletedMedia: mediaFile, at: index)
             }
         }.catch { error in
@@ -219,14 +219,14 @@ extension MediaBrowserViewController {
 extension MediaBrowserViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let mediaFileDetailViewController = viewController as? MediaFileDetailViewController,
-            let index = dataSource.index(where: { $0 === mediaFileDetailViewController.mediaFile }),
+            let index = dataSource.firstIndex(where: { $0 === mediaFileDetailViewController.mediaFile }),
             let mediaFile = mediaFileAtIndex(index - 1) else { return nil }
         return initMediaFileDetailViewController(mediaFile: mediaFile)
     }
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let mediaFileDetailViewController = viewController as? MediaFileDetailViewController,
-            let index = dataSource.index(where: { $0 === mediaFileDetailViewController.mediaFile }),
+            let index = dataSource.firstIndex(where: { $0 === mediaFileDetailViewController.mediaFile }),
             let mediaFile = mediaFileAtIndex(index + 1) else { return nil }
         return initMediaFileDetailViewController(mediaFile: mediaFile)
     }
