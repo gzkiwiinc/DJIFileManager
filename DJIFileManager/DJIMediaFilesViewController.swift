@@ -336,7 +336,7 @@ extension DJIMediaFilesViewController: BottomToolBarDelegate {
 
 extension DJIMediaFilesViewController: MediaBrowserDelegate {
     func mediaBrowser(_ mediaBrowser: MediaBrowserViewController, referenceViewForMedia media: MediaFileBrowsable) -> UIView? {
-        if let index = mediaFileModelList.index(where: { $0 === media }) {
+        if let index = mediaFileModelList.firstIndex(where: { $0 === media }) {
             let currentSelectedIndexPath = IndexPath(item: index, section: 0)
             if let cell = collectionView.cellForItem(at: currentSelectedIndexPath) as? MediaFileCollectionViewCell {
                 return cell.imageView
