@@ -1,6 +1,6 @@
 # DJIFileManger
 
-![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)   ![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)  ![MIT](https://img.shields.io/github/license/gzkiwiinc/DJIFileManager.svg)
+![iOS 9.0+](https://img.shields.io/badge/iOS-9.0%2B-blue.svg)   ![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)  ![MIT](https://img.shields.io/github/license/gzkiwiinc/DJIFileManager.svg)
 
 DJIFileManger 是一个基于 [DJI-SDK-iOS](https://developer.dji.com/mobile-sdk/) 和 [DJISDKExtension](https://github.com/gzkiwiinc/DJISDKExtension) 的简单媒体文件管理工具。它提供了缩略图浏览界面，单张预览图浏览，媒体文件信息查看，以及下载分享等功能。
 
@@ -22,7 +22,7 @@ DJIFileManger is a simple media files manager for DJI product. It's base on [DJI
 ## Requirements
 
 - iOS 9.0+
-- Swift 4.2
+- Swift 5.0
 
 ## Installation
 
