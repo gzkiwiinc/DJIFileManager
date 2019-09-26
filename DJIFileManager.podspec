@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DJIFileManager'
-    s.version          = '1.1.0'
+    s.version          = '1.2.0'
     s.summary          = 'A file management component for DJISDK-iOS'
     s.homepage         = 'https://github.com/gzkiwiinc/DJIFileManager'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -17,13 +17,12 @@ Pod::Spec.new do |s|
         'DJIFileManager' => ['DJIFileManager/Assets/*']
     }
 
-    s.dependency 'DJI-SDK-iOS', '~> 4.9'
+    s.dependency 'DJI-SDK-iOS', '~> 4.11'
     s.dependency 'SnapKit'
     s.dependency 'PromiseKit'
     s.dependency 'MJRefresh'
     s.dependency 'DJISDKExtension'
+    
     s.frameworks = 'UIKit'
-
-    s.pod_target_xcconfig = {'ENABLE_BITCODE' => 'NO'} # due to dji sdk
     
 end

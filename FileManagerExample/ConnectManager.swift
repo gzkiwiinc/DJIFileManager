@@ -30,7 +30,7 @@ class ConnectManager: NSObject {
 }
 
 extension ConnectManager: DJISDKManagerDelegate {
-    
+
     func appRegisteredWithError(_ error: Error?) {
         if let error = error {
             DemoHelper.showAlert(message: "SDK Registered with error \(error.localizedDescription)")
@@ -60,6 +60,11 @@ extension ConnectManager: DJISDKManagerDelegate {
     func componentDisconnected(withKey key: String?, andIndex index: Int) {
         
     }
+    
+    func didUpdateDatabaseDownloadProgress(_ progress: Progress) {
+        
+    }
+    
 }
 
 extension DJIAppActivationState {
@@ -73,6 +78,8 @@ extension DJIAppActivationState {
             return "Activated"
         case .notSupported:
             return "App Activation is not supported"
+        @unknown default:
+            fatalError()
         }
     }
 }
@@ -94,6 +101,8 @@ extension DJIAppActivationAircraftBindingState {
             return "Binding is not required. "
         case .notSupported:
             return "App Activation is not supported. "
+        @unknown default:
+            fatalError()
         }
     }
 }
