@@ -71,7 +71,7 @@ extension DJIMediaFilesViewController {
         collectionView.mj_footer = MJRefreshAutoNormalFooter {
             self.loadMoreMediaFiles()
         }
-        collectionView.mj_footer.isHidden = true
+        collectionView.mj_footer!.isHidden = true
         
         placeholderStateView.setup(state: .loading)
         collectionView.addSubview(placeholderStateView)
@@ -127,8 +127,8 @@ extension DJIMediaFilesViewController {
             return self.fetchMediaThumbnail(mediaFileList: fileList)
         }.done {
             self.navigationItem.rightBarButtonItem = self.selectButton
-            self.collectionView.mj_footer.isHidden = false
-            self.collectionView.mj_footer.endRefreshing()
+            self.collectionView.mj_footer!.isHidden = false
+            self.collectionView.mj_footer!.endRefreshing()
             self.collectionView.reloadData()
         }.catch { error in
             self.placeholderStateView.setup(state: .timeout)
@@ -162,7 +162,7 @@ extension DJIMediaFilesViewController {
     }
     
     private func fetchMediaThumbnail(mediaFileList: [DJIMediaFile]) -> Promise<Void> {
-        collectionView.mj_footer.isHidden = true
+        collectionView.mj_footer!.isHidden = true
         if mediaFileList.count == 0 {
             placeholderStateView.setup(state: .noData)
             return Promise.value(())
@@ -244,7 +244,7 @@ extension DJIMediaFilesViewController {
     
     private func loadMoreMediaFiles() {
         if mediaFileIndex >= djiMediaFileList.count {
-            collectionView.mj_footer.endRefreshingWithNoMoreData()
+            collectionView.mj_footer!.endRefreshingWithNoMoreData()
         } else {
             page += 1
             fetchMediaFilesSnapshot()
@@ -258,7 +258,7 @@ extension DJIMediaFilesViewController {
 extension DJIMediaFilesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         placeholderStateView.isHidden = mediaFileModelList.count > 0
-        collectionView.mj_footer.isHidden = mediaFileModelList.count < batchCount
+        collectionView.mj_footer!.isHidden = mediaFileModelList.count < batchCount
         return mediaFileModelList.count
     }
     
