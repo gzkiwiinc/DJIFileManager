@@ -15,6 +15,7 @@
 		8501E34C21425779001BBE51 /* ConnectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501E34A21425779001BBE51 /* ConnectManager.swift */; };
 		8501E34D21425779001BBE51 /* DemoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501E34B21425779001BBE51 /* DemoHelper.swift */; };
 		8501E35521425877001BBE51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8501E35421425877001BBE51 /* LaunchScreen.storyboard */; };
+		C004D69B23EA7C31008B6DE2 /* DJIFileManager.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C004D69A23EA7C31008B6DE2 /* DJIFileManager.podspec */; };
 		C02546D5221BFF54000C2C3A /* PlaceholderStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02546D4221BFF54000C2C3A /* PlaceholderStateView.swift */; };
 		C03DF58421474ECA00580AC4 /* DJIMediaFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03DF58321474ECA00580AC4 /* DJIMediaFilesViewController.swift */; };
 		C06F7ADC2148C0F20072855D /* DJICamera+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F7ADB2148C0F20072855D /* DJICamera+CustomStringConvertible.swift */; };
@@ -92,6 +93,7 @@
 		8501E34B21425779001BBE51 /* DemoHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoHelper.swift; sourceTree = "<group>"; };
 		8501E35421425877001BBE51 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95E33A6CABF73E3D1304FC74 /* Pods_DJIFileManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DJIFileManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C004D69A23EA7C31008B6DE2 /* DJIFileManager.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = DJIFileManager.podspec; sourceTree = SOURCE_ROOT; };
 		C02546D4221BFF54000C2C3A /* PlaceholderStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderStateView.swift; sourceTree = "<group>"; };
 		C03DF58321474ECA00580AC4 /* DJIMediaFilesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DJIMediaFilesViewController.swift; sourceTree = "<group>"; };
 		C06F7ADB2148C0F20072855D /* DJICamera+CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DJICamera+CustomStringConvertible.swift"; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 		C09186612136A7AD006FA822 /* DJIFileManager */ = {
 			isa = PBXGroup;
 			children = (
+				C004D69A23EA7C31008B6DE2 /* DJIFileManager.podspec */,
 				C039D4A721417E7C009FBFB8 /* ViewControllers */,
 				C039D4A621417E79009FBFB8 /* Views */,
 				C039D4A521417E6D009FBFB8 /* Managers */,
@@ -368,7 +371,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = kiwi;
 				TargetAttributes = {
 					8501E33721425722001BBE51 = {
@@ -386,10 +389,9 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "DJIFileManager" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -421,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C004D69B23EA7C31008B6DE2 /* DJIFileManager.podspec in Resources */,
 				C09186B32136B7FA006FA822 /* Assets.xcassets in Resources */,
 				C09186B22136B7FA006FA822 /* Localizable.strings in Resources */,
 			);
@@ -751,7 +754,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -789,7 +792,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
