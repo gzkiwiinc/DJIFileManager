@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '10.0'
     s.swift_version = '5.0'
-    s.xcconfig = { 'EXCLUDED_ARCHS' => 'i386' }
+    s.xcconfig = { 'EXCLUDED_ARCHS' => 'i386',
+                 'ONLY_ACTIVE_ARCH' => 'YES'}
     
     s.source_files = 'DJIFileManager/*.swift'
     s.resource_bundles = {
