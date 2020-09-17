@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'DJIFileManager'
-    s.version          = '1.3.0'
+    s.version          = '1.4.0'
     s.summary          = 'A file management component for DJISDK-iOS'
     s.homepage         = 'https://github.com/gzkiwiinc/DJIFileManager'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
     
     s.ios.deployment_target = '10.0'
     s.swift_version = '5.0'
-    s.xcconfig = { 'VALID_ARCHS' => 'arm64 arm64e' }
+    s.xcconfig = { 'EXCLUDED_ARCHS' => 'i386' }
     
     s.source_files = 'DJIFileManager/*.swift'
     s.resource_bundles = {
