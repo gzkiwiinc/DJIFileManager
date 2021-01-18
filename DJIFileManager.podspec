@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
         'DJIFileManager' => ['DJIFileManager/Assets/*']
     }
 
-    s.dependency 'DJI-SDK-iOS', '~> 4.11'
+    s.dependency 'DJI-SDK-iOS'
     s.dependency 'SnapKit'
     s.dependency 'PromiseKit'
     s.dependency 'MJRefresh'

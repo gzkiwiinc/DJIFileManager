@@ -1,8 +1,8 @@
 PODS:
-  - DJI-SDK-iOS (4.11.2)
-  - DJISDKExtension (1.5.0):
-    - DJI-SDK-iOS (~> 4.11.0)
-    - PromiseKit
+  - DJI-SDK-iOS (4.14-trial2)
+  - DJISDKExtension (1.4.3):
+    - DJI-SDK-iOS (~> 4.11)
+    - PromiseKit (~> 6.4)
   - MJRefresh (3.5.0)
   - PromiseKit (6.13.1):
     - PromiseKit/CorePromise (= 6.13.1)
@@ -16,7 +16,7 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
-  - DJI-SDK-iOS (~> 4.11)
+  - DJI-SDK-iOS (= 4.14-trial2)
   - DJISDKExtension
   - MJRefresh
   - PromiseKit
@@ -31,12 +31,12 @@ SPEC REPOS:
     - SnapKit
 
 SPEC CHECKSUMS:
-  DJI-SDK-iOS: dd421937079d101dee461eb5c311cb9d26404dd7
-  DJISDKExtension: f978e9214487f0e8a9a90a19c6e8391b3b1a7382
+  DJI-SDK-iOS: 2234b3b896091f77a072099115f560e9ee8347a0
+  DJISDKExtension: c88bb3ebe52e6b1e180137d316462e7c511ff096
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 2c4a5e1f3ed94c3f9139779277ffe8bd7a1c56d7
+PODFILE CHECKSUM: 2405ccaaeb271fcd57ee1eb353264829cd6b4f02
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.0

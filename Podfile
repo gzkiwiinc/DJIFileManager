@@ -3,7 +3,7 @@ inhibit_all_warnings!
 use_frameworks!
 
 def share_pods
-  pod 'DJI-SDK-iOS'
+  pod 'DJI-SDK-iOS', '4.14-trial2'
   pod 'SnapKit'
   pod 'PromiseKit'
   pod 'DJISDKExtension'
